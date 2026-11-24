@@ -3,7 +3,7 @@ import { createTestDb, seedBaseData, type TestDb } from "~/test/setup";
 import * as schema from "~/db/schema";
 import { CourseStatus, UserRole } from "~/db/schema";
 import { markdown } from "~/lib/text";
-import { createLandingPage, FEATURED_COURSE_LIMIT } from "../index.server";
+import { createLandingPage } from "../index.server";
 
 let db: TestDb;
 let base: ReturnType<typeof seedBaseData>;
@@ -93,7 +93,6 @@ describe("featured courses", () => {
 
     const titles = load().featuredCourses.map((c) => c.title);
 
-    expect(FEATURED_COURSE_LIMIT).toBe(3);
     expect(titles).toEqual(["Newest", "Newer", "Middle"]);
   });
 
@@ -177,7 +176,7 @@ describe("stats", () => {
     const page = load();
 
     expect(page.stats.courses).toBe(61);
-    expect(page.featuredCourses).toHaveLength(FEATURED_COURSE_LIMIT);
+    expect(page.featuredCourses).toHaveLength(3);
   });
 
   it("counts every category", () => {
