@@ -15,7 +15,8 @@ export function describeDraft(
   const length = draft.length;
   const tooLong = length > maxLength;
   const empty = draft.trim().length === 0;
-  const unchanged = draft === savedBody;
+  // The server stores the note trimmed, so whitespace at the ends is not a change.
+  const unchanged = draft.trim() === savedBody;
 
   return {
     length,

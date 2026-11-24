@@ -24,6 +24,13 @@ describe("noteDraftStatus", () => {
     expect(status.canSave).toBe(false);
   });
 
+  it("treats a draft that differs only by surrounding whitespace as saved", () => {
+    // The server trims the note before storing it.
+    const status = noteDraftStatus("Tokens first. \n", "Tokens first.");
+    expect(status.unchanged).toBe(true);
+    expect(status.canSave).toBe(false);
+  });
+
   it("saves an edit to an existing note", () => {
     const status = noteDraftStatus("Same text, edited", "Same text");
     expect(status.unchanged).toBe(false);
