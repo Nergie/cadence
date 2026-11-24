@@ -137,28 +137,34 @@ export function computeResult(
     const passed = scoreValue > 0.7;
     const grade = calculateGrade(scoreValue);
 
-    const attempt = db
-      .insert(quizAttempts)
-      .values({
-        userId,
-        quizId,
-        score: scoreValue,
-        passed,
-      })
-      .returning()
-      .get();
+    // An attempt without its answers would show a score nobody can review.
+    const attempt = db.transaction((tx) => {
+      const inserted = tx
+        .insert(quizAttempts)
+        .values({
+          userId,
+          quizId,
+          score: scoreValue,
+          passed,
+        })
+        .returning()
+        .get();
 
-    for (const result of questionResults) {
-      if (result.selectedOptionId !== null) {
-        db.insert(quizAnswers)
-          .values({
-            attemptId: attempt.id,
-            questionId: result.questionId,
-            selectedOptionId: result.selectedOptionId,
-          })
-          .run();
-      }
-    }
+      const answers = questionResults.flatMap((result) =>
+        result.selectedOptionId === null
+          ? []
+          : [
+              {
+                attemptId: inserted.id,
+                questionId: result.questionId,
+                selectedOptionId: result.selectedOptionId,
+              },
+            ]
+      );
+      if (answers.length > 0) tx.insert(quizAnswers).values(answers).run();
+
+      return inserted;
+    });
 
     return {
       attemptId: attempt.id,
