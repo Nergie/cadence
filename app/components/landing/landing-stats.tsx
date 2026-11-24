@@ -1,7 +1,7 @@
 import { BookOpen, GraduationCap, PlayCircle, Users } from "lucide-react";
-import type { LandingStats as Stats } from "~/modules/landing-page/index.server";
+import type { LandingStats as LandingStatsData } from "~/modules/landing-page/index.server";
 
-export function LandingStats({ stats }: { stats: Stats }) {
+export function LandingStats({ stats }: { stats: LandingStatsData }) {
   const items = [
     { icon: BookOpen, value: stats.courses, label: "Published courses" },
     { icon: PlayCircle, value: stats.lessons, label: "Lessons" },
