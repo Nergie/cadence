@@ -144,7 +144,6 @@
         "app/modules/instructor-analytics/lib/instructor-analytics.ts",
         "app/modules/instructor-analytics/tests/instructor-analytics.test.ts",
         "app/routes/admin.categories.tsx",
-        "app/routes/courses.$slug.lessons.$lessonId.tsx",
         "app/routes/courses.$slug.purchase.tsx",
         "app/routes/courses.$slug.tsx",
         "app/routes/courses.tsx",
@@ -163,6 +162,10 @@
     {
       "files": [
         "app/components/comment-thread.tsx",
+        "app/components/lesson-curriculum-sidebar.tsx",
+        "app/components/lesson-full.tsx",
+        "app/components/lesson-locked.tsx",
+        "app/components/lesson-quiz-section.tsx",
         "app/components/dev-ui.tsx",
         "app/components/monaco-markdown-editor.tsx",
         "app/components/notification-feed.tsx",
@@ -177,12 +180,16 @@
         "app/lib/refunds.server.ts",
         "app/lib/seat-claims.server.ts",
         "app/modules/instructor-analytics/lib/instructor-analytics.ts",
+        "app/modules/lesson-page/lib/act.server.ts",
+        "app/modules/lesson-page/lib/comments.server.ts",
+        "app/modules/lesson-page/lib/course.server.ts",
+        "app/modules/lesson-page/lib/load.server.ts",
+        "app/modules/lesson-page/lib/quiz.server.ts",
         "app/routes/admin.categories.tsx",
         "app/routes/admin.courses.tsx",
         "app/routes/admin.refunds.tsx",
         "app/routes/admin.users.tsx",
         "app/routes/courses.$slug.$moduleId.tsx",
-        "app/routes/courses.$slug.lessons.$lessonId.tsx",
         "app/routes/courses.$slug.purchase.tsx",
         "app/routes/courses.$slug.tsx",
         "app/routes/courses.$slug.welcome.tsx",
@@ -248,7 +255,8 @@
     },
     {
       "files": [
-        "app/routes/courses.$slug.lessons.$lessonId.tsx",
+        "app/modules/lesson-page/lib/act.server.ts",
+        "app/modules/lesson-page/lib/load.server.ts",
         "request-logger/render.ts"
       ],
       "rules": {
